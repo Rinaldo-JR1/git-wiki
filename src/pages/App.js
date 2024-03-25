@@ -30,6 +30,11 @@ function App() {
       return;
     }
   };
+  const handleRemoveRepo = (id) => {
+    console.log("Removendo registro", id);
+    const newRepos = repos.filter((repo) => repo.id !== id);
+    setRepos(newRepos);
+  };
 
   return (
     <Container>
@@ -37,7 +42,13 @@ function App() {
       <Input value={curruentRepo} action={setCurruentRepo} />
       <Button action={handleSearchRepo} />
       {repos.length >= 1
-        ? repos?.map((repo) => <ItemRepo key={repo.id} repo={repo} />)
+        ? repos?.map((repo) => (
+            <ItemRepo
+              handleRemoveRepo={handleRemoveRepo}
+              key={repo.id}
+              repo={repo}
+            />
+          ))
         : null}
     </Container>
   );
